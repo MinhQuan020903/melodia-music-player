@@ -4,10 +4,11 @@
   "pipeline": {
     "dev": {
       "cache": false,
+      "env": [".env"],
       "dotEnv": [
-        ".env.production.local",
+        ".env.development.local",
         ".env.local",
-        ".env.production",
+        ".env.development",
         ".env"
       ]
     },

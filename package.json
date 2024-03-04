@@ -3,13 +3,14 @@
     "turbo": "^1.12.4"
   },
   "scripts": {
-    "dev": "dotenv -- turbo dev",
-    "build": "dotenv -- turbo build"
+    "dev": "dotenv -- turbo run dev",
+    "build": "dotenv -- turbo run build"
   },
   "workspaces": [
     "apps/*"
   ],
   "dependencies": {
+    "@nestjs/config": "^3.2.0",
     "axios": "^1.6.7",
     "dotenv": "^16.4.5",
     "dotenv-cli": "^7.3.0"

@@ -8,11 +8,12 @@ export default function Home() {
   useEffect(() => {
     const getData = async () => {
       const res = await getRequest({
-        endPoint: 'http://localhost:3001/api/v1',
+        endPoint: process.env.BACKEND_URL + 'api',
       });
+      console.log('🚀 ~ getData ~ endPoint:', process.env.BACKEND_URL + 'api');
       console.log('🚀 ~ getData ~ res:', res);
 
-      setData(res);
+      setData(res.data);
     };
     getData();
   }, []);
