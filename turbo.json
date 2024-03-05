@@ -1,28 +1,21 @@
 {
-  "$schema": "https://turbo.build/schema.json",
-  "globalDotEnv": [".env"],
-  "pipeline": {
-    "dev": {
-      "cache": false,
-      "env": [".env"],
-      "dotEnv": [
-        ".env.development.local",
-        ".env.local",
-        ".env.development",
-        ".env"
-      ]
+    "$schema": "https://turbo.build/schema.json",
+    "globalDotEnv": [".env"],
+    "pipeline": {
+        "lint": {},
+        "prepare": {},
+        "precommit": {},
+        "dev": {
+            "cache": false,
+            "env": [".env"],
+            "dotEnv": [".env.development.local", ".env.local", ".env.development", ".env"]
+        },
+        "build": {
+            "dependsOn": ["^build"],
+            "outputs": ["dist/**"],
+            "dotEnv": [".env.production.local", ".env.local", ".env.production", ".env"]
+        }
     },
-    "build": {
-      "dependsOn": ["^build"],
-      "outputs": ["dist/**"],
-      "dotEnv": [
-        ".env.production.local",
-        ".env.local",
-        ".env.production",
-        ".env"
-      ]
-    }
-  },
 
-  "globalDependencies": [".env", "tsconfig.json"]
+    "globalDependencies": [".env", "tsconfig.json", "eslint"]
 }

@@ -1,18 +1,26 @@
 {
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^7.1.1",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.2",
     "turbo": "^1.12.4"
   },
   "scripts": {
     "dev": "dotenv -- turbo run dev",
-    "build": "dotenv -- turbo run build"
+    "build": "dotenv -- turbo run build",
+    "lint": "turbo run lint",
+    "prepare": "husky",
+    "pre-commit": "turbo run lint",
+    "preinstall": "npx only-allow pnpm",
+    "postinstall": "husky init"
   },
-  "workspaces": [
-    "apps/*"
-  ],
   "dependencies": {
+    "@babel/core": "^7.24.0",
+    "@babel/eslint-parser": "^7.23.10",
     "@nestjs/config": "^3.2.0",
     "axios": "^1.6.7",
     "dotenv": "^16.4.5",
-    "dotenv-cli": "^7.3.0"
+    "dotenv-cli": "^7.3.0",
+    "eslint": "^8.57.0"
   }
 }
