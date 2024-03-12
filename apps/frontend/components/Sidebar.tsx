@@ -12,6 +12,7 @@ import Library from './Library';
 
 import { Song } from '@/types';
 import usePlayer from '@/hooks/usePlayer';
+import Image from 'next/image';
 
 interface SidebarProps {
   children: React.ReactNode;
@@ -37,21 +38,27 @@ const Sidebar: React.FC<SidebarProps> = ({ children, songs }) => {
         href: '/search',
       },
     ],
-    [pathname]
+    [pathname],
   );
 
   return (
-    <div
-      className={twMerge(
-        `flex h-full`,
-        player.activeId && 'h-[calc(100%-80px)]'
-      )}
-    >
+    <div className={twMerge(`flex h-full`, player.activeId && 'h-[calc(100%-80px)]')}>
       <div
         className="hidden md:flex flex-col gap-y-2
       bg-black h-full w-[300px] p-2"
       >
         <Box>
+          <div className="flex items-center justify-start w-full">
+            <Image
+              src="/images/logo.png"
+              alt="Logo"
+              className="object-cover"
+              width={80}
+              height={80}
+            />
+
+            <h1 className="text-white text-2xl font-bold font-mono">Melodia</h1>
+          </div>
           <div className="flex flex-col gap-y-4 px-5 py-4">
             {routes.map((item) => (
               <SidebarItem key={item.label} {...item} />
