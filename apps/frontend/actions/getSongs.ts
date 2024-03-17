@@ -2,22 +2,19 @@ import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
 
 import { Song } from '@/types';
+import { getRequest } from '@/lib/fetch';
 
 const getSongs = async (): Promise<Song[]> => {
-  const supabase = createServerComponentClient({
-    cookies: cookies,
-  });
+    const onGetSongs = async () => {
+        const songs = await getRequest({
+            endPoint: `/api/song`,
+        });
+        return songs;
+    };
+    const res = await onGetSongs();
+    console.log('🚀 ~ getSongs ~ res:', res);
 
-  const { data, error } = await supabase
-    .from('songs')
-    .select('*')
-    .order('created_at', { ascending: false });
-
-  if (error) {
-    console.log(error.message);
-  }
-
-  return (data as any) || [];
+    return res?.data || [];
 };
 
 export default getSongs;

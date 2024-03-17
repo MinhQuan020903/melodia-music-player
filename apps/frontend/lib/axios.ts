@@ -1,7 +1,9 @@
+import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import axios from 'axios';
+import { cookies } from 'next/headers';
 
 const config = {
-    baseURL: process.env.NEXT_PUBLIC_SITE_URL,
+    baseURL: 'http://localhost:' + process.env.NEXT_PUBLIC_BACKEND_PORT,
     headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
@@ -9,14 +11,34 @@ const config = {
 };
 
 const axiosClient = axios.create(config);
-
-axiosClient.interceptors.response.use(
-    (res: any) => Promise.resolve(res.data),
+axiosClient.interceptors.request.use(
+    async (res: any) => {
+        const supabase = createServerComponentClient({
+            cookies: cookies,
+        });
+        const { data, error } = await supabase.auth.getSession();
+        if (data.session?.access_token) {
+            res.headers.Authorization = `Bearer ${data.session?.access_token}`;
+        } else {
+        }
+        return Promise.resolve(res);
+    },
     async (err: any) => {
-        // const originalRequest = err.config;
-        // console.log('err.response.status', err.response.status, err.config.__isRetryRequest);
+        const originalRequest = err.config;
+        console.log('error');
 
         if (err && err.response && err.response.status === 401 && !err.config.__isRetryRequest) {
+            // const supabase = createServerComponentClient({
+            //     cookies: cookies,
+            // });
+            // const { data, error } = await supabase.auth.getSession();
+            // if (data.session?.access_token) {
+            //     console.log('🚀 ~ data:', data.session.access_token);
+            //     err.headers.Authorization = `Bearer ${data.session?.access_token}`;
+            // } else {
+            //     console.log('🚀 ~ error:', error);
+            // }
+            // return Promise.resolve(err);
             // const { setKeySite } = useKey();
             // const refreshToken = getKey(KEY_CONTEXT.REFRESH_TOKEN);
             // const salt = encryptRSA(`${getCurrentTS()}`);

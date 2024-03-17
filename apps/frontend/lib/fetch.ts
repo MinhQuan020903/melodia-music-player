@@ -4,7 +4,7 @@ import axiosClient from './axios';
 
 export const getRequest = async ({ endPoint }: { endPoint: string }) => {
     const res = await axiosClient.get(endPoint);
-    return res;
+    return res.data;
 };
 
 export const postRequest = async ({
