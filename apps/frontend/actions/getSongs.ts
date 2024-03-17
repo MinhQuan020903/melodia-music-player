@@ -5,28 +5,16 @@ import { Song } from '@/types';
 import { getRequest } from '@/lib/fetch';
 
 const getSongs = async (): Promise<Song[]> => {
-    const onGetSongsByUserId = async () => {
+    const onGetSongs = async () => {
         const songs = await getRequest({
-            endPoint: `/api`,
+            endPoint: `/api/song`,
         });
-        console.log('🚀 ~ onGetSongsByUserId ~ songs:', songs);
         return songs;
     };
-    console.log('15:res: ' + JSON.stringify(onGetSongsByUserId()));
-    const supabase = createServerComponentClient({
-        cookies: cookies,
-    });
+    const res = await onGetSongs();
+    console.log('🚀 ~ getSongs ~ res:', res);
 
-    const { data, error } = await supabase
-        .from('songs')
-        .select('*')
-        .order('created_at', { ascending: false });
-
-    if (error) {
-        console.log(error.message);
-    }
-
-    return (data as any) || [];
+    return res?.data || [];
 };
 
 export default getSongs;

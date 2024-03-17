@@ -11,24 +11,21 @@ const config = {
 };
 
 const axiosClient = axios.create(config);
-
-axiosClient.interceptors.response.use(
+axiosClient.interceptors.request.use(
     async (res: any) => {
         const supabase = createServerComponentClient({
             cookies: cookies,
         });
         const { data, error } = await supabase.auth.getSession();
         if (data.session?.access_token) {
-            console.log('🚀interceptors ~ data:', data.session.access_token);
             res.headers.Authorization = `Bearer ${data.session?.access_token}`;
         } else {
-            console.log('🚀 ~ error:', error);
         }
-        return Promise.resolve(res.data);
+        return Promise.resolve(res);
     },
     async (err: any) => {
         const originalRequest = err.config;
-        console.log(originalRequest);
+        console.log('error');
 
         if (err && err.response && err.response.status === 401 && !err.config.__isRetryRequest) {
             // const supabase = createServerComponentClient({
