@@ -23,18 +23,24 @@ importers:
       '@radix-ui/react-slider':
         specifier: ^1.1.2
         version: 1.1.2(@types/react-dom@18.2.19)(@types/react@18.2.61)(react-dom@18.2.0)(react@18.2.0)
+      '@stripe/stripe-js':
+        specifier: ^3.0.8
+        version: 3.0.8
       '@supabase/auth-helpers-nextjs':
         specifier: ^0.9.0
-        version: 0.9.0(@supabase/supabase-js@2.39.7)
+        version: 0.9.0(@supabase/supabase-js@2.39.8)
       '@supabase/auth-helpers-react':
         specifier: ^0.4.2
-        version: 0.4.2(@supabase/supabase-js@2.39.7)
+        version: 0.4.2(@supabase/supabase-js@2.39.8)
       '@supabase/auth-ui-react':
         specifier: ^0.4.7
-        version: 0.4.7(@supabase/supabase-js@2.39.7)
+        version: 0.4.7(@supabase/supabase-js@2.39.8)
       '@supabase/auth-ui-shared':
         specifier: ^0.1.8
-        version: 0.1.8(@supabase/supabase-js@2.39.7)
+        version: 0.1.8(@supabase/supabase-js@2.39.8)
+      '@supabase/supabase-js':
+        specifier: ^2.39.8
+        version: 2.39.8
       axios:
         specifier: ^1.6.7
         version: 1.6.7
@@ -68,6 +74,9 @@ importers:
       react-icons:
         specifier: ^5.0.1
         version: 5.0.1(react@18.2.0)
+      react-spinners:
+        specifier: ^0.13.8
+        version: 0.13.8(react-dom@18.2.0)(react@18.2.0)
       stripe:
         specifier: ^14.18.0
         version: 14.19.0
@@ -192,16 +201,16 @@ importers:
         version: 1.1.2(@types/react-dom@18.2.19)(@types/react@18.2.61)(react-dom@18.2.0)(react@18.2.0)
       '@supabase/auth-helpers-nextjs':
         specifier: ^0.9.0
-        version: 0.9.0(@supabase/supabase-js@2.39.7)
+        version: 0.9.0(@supabase/supabase-js@2.39.8)
       '@supabase/auth-helpers-react':
         specifier: ^0.4.2
-        version: 0.4.2(@supabase/supabase-js@2.39.7)
+        version: 0.4.2(@supabase/supabase-js@2.39.8)
       '@supabase/auth-ui-react':
         specifier: ^0.4.7
-        version: 0.4.7(@supabase/supabase-js@2.39.7)
+        version: 0.4.7(@supabase/supabase-js@2.39.8)
       '@supabase/auth-ui-shared':
         specifier: ^0.1.8
-        version: 0.1.8(@supabase/supabase-js@2.39.7)
+        version: 0.1.8(@supabase/supabase-js@2.39.8)
       next:
         specifier: 14.1.0
         version: 14.1.0(@babel/core@7.24.0)(react-dom@18.2.0)(react@18.2.0)
@@ -1724,52 +1733,57 @@ packages:
     resolution: {integrity: sha512-Gfkvwk9o9kE9r9XNBmJRfV8zONvXThnm1tcuojL04Uy5uRyqg93DC83lDebl0rocZCfKSjUv+fWYtMQmEDJldg==}
     dev: false
 
-  /@supabase/auth-helpers-nextjs@0.9.0(@supabase/supabase-js@2.39.7):
+  /@stripe/stripe-js@3.0.8:
+    resolution: {integrity: sha512-nEDZjCSrGI5GICqr2DsV7gPnEjmt5Y61Uj/z/UuWu3WR/ZyyskbEW/3ziVZdnnvFcoNCfpV2wA2ar1C1W//+Vg==}
+    engines: {node: '>=12.16'}
+    dev: false
+
+  /@supabase/auth-helpers-nextjs@0.9.0(@supabase/supabase-js@2.39.8):
     resolution: {integrity: sha512-V+UKFngSCkzAucX3Zi5D4TRiJZUUx0RDme7W217nIkwhCTvJY7Ih2L1cgnAMihQost2YYgTzJ7DrUzz4mm8i8A==}
     peerDependencies:
       '@supabase/supabase-js': ^2.19.0
     dependencies:
-      '@supabase/auth-helpers-shared': 0.6.3(@supabase/supabase-js@2.39.7)
-      '@supabase/supabase-js': 2.39.7
+      '@supabase/auth-helpers-shared': 0.6.3(@supabase/supabase-js@2.39.8)
+      '@supabase/supabase-js': 2.39.8
       set-cookie-parser: 2.6.0
     dev: false
 
-  /@supabase/auth-helpers-react@0.4.2(@supabase/supabase-js@2.39.7):
+  /@supabase/auth-helpers-react@0.4.2(@supabase/supabase-js@2.39.8):
     resolution: {integrity: sha512-zRj1leYMKJVYQeHFvZiUzlmHM+ATWFR/V7Q9F0yXSWEnMcNHL0CKnIBqhkjtSQ2trE+YaoCvFEHjxISppxIZXQ==}
     peerDependencies:
       '@supabase/supabase-js': ^2.19.0
     dependencies:
-      '@supabase/supabase-js': 2.39.7
+      '@supabase/supabase-js': 2.39.8
     dev: false
 
-  /@supabase/auth-helpers-shared@0.6.3(@supabase/supabase-js@2.39.7):
+  /@supabase/auth-helpers-shared@0.6.3(@supabase/supabase-js@2.39.8):
     resolution: {integrity: sha512-xYQRLFeFkL4ZfwC7p9VKcarshj3FB2QJMgJPydvOY7J5czJe6xSG5/wM1z63RmAzGbCkKg+dzpq61oeSyWiGBQ==}
     peerDependencies:
       '@supabase/supabase-js': ^2.19.0
     dependencies:
-      '@supabase/supabase-js': 2.39.7
+      '@supabase/supabase-js': 2.39.8
       jose: 4.15.4
     dev: false
 
-  /@supabase/auth-ui-react@0.4.7(@supabase/supabase-js@2.39.7):
+  /@supabase/auth-ui-react@0.4.7(@supabase/supabase-js@2.39.8):
     resolution: {integrity: sha512-Lp4FQGFh7BMX1Y/BFaUKidbryL7eskj1fl6Lby7BeHrTctbdvDbCMjVKS8wZ2rxuI8FtPS2iU900fSb70FHknQ==}
     peerDependencies:
       '@supabase/supabase-js': ^2.21.0
     dependencies:
       '@stitches/core': 1.2.8
-      '@supabase/auth-ui-shared': 0.1.8(@supabase/supabase-js@2.39.7)
-      '@supabase/supabase-js': 2.39.7
+      '@supabase/auth-ui-shared': 0.1.8(@supabase/supabase-js@2.39.8)
+      '@supabase/supabase-js': 2.39.8
       prop-types: 15.8.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
     dev: false
 
-  /@supabase/auth-ui-shared@0.1.8(@supabase/supabase-js@2.39.7):
+  /@supabase/auth-ui-shared@0.1.8(@supabase/supabase-js@2.39.8):
     resolution: {integrity: sha512-ouQ0DjKcEFg+0gZigFIEgu01V3e6riGZPzgVD0MJsCBNsMsiDT74+GgCEIElMUpTGkwSja3xLwdFRFgMNFKcjg==}
     peerDependencies:
       '@supabase/supabase-js': ^2.21.0
     dependencies:
-      '@supabase/supabase-js': 2.39.7
+      '@supabase/supabase-js': 2.39.8
     dev: false
 
   /@supabase/functions-js@2.1.5:
@@ -1815,8 +1829,8 @@ packages:
       '@supabase/node-fetch': 2.6.15
     dev: false
 
-  /@supabase/supabase-js@2.39.7:
-    resolution: {integrity: sha512-1vxsX10Uhc2b+Dv9pRjBjHfqmw2N2h1PyTg9LEfICR3x2xwE24By1MGCjDZuzDKH5OeHCsf4it6K8KRluAAEXA==}
+  /@supabase/supabase-js@2.39.8:
+    resolution: {integrity: sha512-WpiawHjseIRcCQTZbMJtHUSOepz5+M9qE1jP9BDmg8X7ehALFwgEkiKyHAu59qm/pKP2ryyQXLtu2XZNRbUarw==}
     dependencies:
       '@supabase/functions-js': 2.1.5
       '@supabase/gotrue-js': 2.62.2
@@ -6511,6 +6525,16 @@ packages:
       tslib: 2.6.2
       use-callback-ref: 1.3.1(@types/react@18.2.61)(react@18.2.0)
       use-sidecar: 1.1.2(@types/react@18.2.61)(react@18.2.0)
+    dev: false
+
+  /react-spinners@0.13.8(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-3e+k56lUkPj0vb5NDXPVFAOkPC//XyhKPJjvcGjyMNPWsBKpplfeyialP74G7H7+It7KzhtET+MvGqbKgAqpZA==}
+    peerDependencies:
+      react: ^16.0.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.0.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
     dev: false
 
   /react-style-singleton@2.2.1(@types/react@18.2.61)(react@18.2.0):
