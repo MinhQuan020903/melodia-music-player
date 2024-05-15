@@ -87,6 +87,7 @@ const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) => {
       setVolume(0);
     }
   };
+
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 h-full">
       <div className="flex w-full justify-start">
@@ -128,11 +129,7 @@ const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) => {
 
       <div className="hidden md:flex w-full justify-end pr-2">
         <div className="flex items-center gap-x-2 w-[120px]">
-          <VolumeIcon
-            onClick={toggleMute}
-            className="cursor-pointer"
-            size={34}
-          />
+          <VolumeIcon onClick={toggleMute} className="cursor-pointer" size={34} />
           <Slider value={volume} onChange={(value) => setVolume(value)} />
         </div>
       </div>
