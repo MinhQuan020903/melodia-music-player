@@ -137,3 +137,6 @@ dist
 
 #turbo
 .turbo/
+
+# Ignore Python virtual environment
+venv/
