@@ -10,34 +10,35 @@ import getSongsByUserId from '@/actions/getSongsByUserId';
 import Player from '@/components/Player';
 import getActiveProductsWithPrices from '@/actions/getActiveProductsWithPrices';
 
+
 const font = Figtree({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-    title: 'Melodia',
-    description: 'Listen to your favorite music on Melodia',
+  title: 'Melodia',
+  description: 'Listen to your favorite music on Melodia',
 };
 
 export const revalidate = 0;
 
 export default async function RootLayout({
-    children,
+  children,
 }: Readonly<{
-    children: React.ReactNode;
+  children: React.ReactNode;
 }>) {
-    const userSongs = await getSongsByUserId();
-    const products = await getActiveProductsWithPrices();
-    return (
-        <html lang="en">
-            <body className={font.className}>
-                <ToasterProvider />
-                <SupabaseProvider>
-                    <UserProvider>
-                        <ModalProvider products={products} />
-                        <Sidebar songs={userSongs}>{children}</Sidebar>
-                        <Player />
-                    </UserProvider>
-                </SupabaseProvider>
-            </body>
-        </html>
-    );
+  const userSongs = await getSongsByUserId();
+  const products = await getActiveProductsWithPrices();
+  return (
+    <html lang="en">
+      <body className={font.className}>
+        <ToasterProvider />
+        <SupabaseProvider>
+          <UserProvider>
+            <ModalProvider products={products} />
+            <Sidebar songs={userSongs}>{children}</Sidebar>
+            <Player />
+          </UserProvider>
+        </SupabaseProvider>
+      </body>
+    </html>
+  );
 }

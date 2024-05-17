@@ -18,13 +18,13 @@ const useOnPlay = (songs: Song[]) => {
   /* Problems: Lowered SMTP rate limits (about 4/hours) */
 
   const onPlay = (id: string) => {
-    if (!user) {
-      authModal.onOpen();
-    }
+    // if (!user) {
+    //   authModal.onOpen();
+    // }
 
-    if (!subscription) {
-      return subscribeModal.onOpen();
-    }
+    // if (!subscription) {
+    //   return subscribeModal.onOpen();
+    // }
 
     /* Note: Click play, not only play a song, play a whole bunch of songs in that page */
     player.setId(id);

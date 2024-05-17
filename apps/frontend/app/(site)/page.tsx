@@ -8,7 +8,9 @@ export const revalidate = 0;
 
 export default async function Home() {
   const songs = await getSongs();
-  const recommendedSongs = await getRecommendedSongs('0cFfCyaHAOFJF8W4JyTuJn');
+  const newestSongs = songs.slice(0, 5);
+  // const recommendedSongs = await getRecommendedSongs('0cFfCyaHAOFJF8W4JyTuJn');
+  const recommendedSongs = songs.slice(6, 10);
 
   return (
     <div className="bg-neutral-900 rounded-lg h-full w-full overflow-h-auto custom-scroll">
@@ -25,7 +27,7 @@ export default async function Home() {
           <h1 className="text-white text-2xl font-semibold">Newest Songs</h1>
         </div>
         <div>
-          <PageContent songs={songs} />
+          <PageContent songs={newestSongs} />
         </div>
       </div>
 

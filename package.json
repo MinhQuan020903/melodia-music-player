@@ -18,6 +18,7 @@
         "@babel/core": "^7.24.0",
         "@babel/eslint-parser": "^7.23.10",
         "@nestjs/config": "^3.2.0",
+        "@nextui-org/react": "^2.3.6",
         "@radix-ui/react-dialog": "^1.0.5",
         "@radix-ui/react-slider": "^1.1.2",
         "@stripe/stripe-js": "^3.0.8",

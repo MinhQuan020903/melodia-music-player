@@ -35,7 +35,7 @@ const UploadModal = () => {
     }
   };
 
-  const removeVietnameseTones = (str: string) => {
+  /*   const removeVietnameseTones = (str: string) => {
     str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, 'a');
     str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, 'e');
     str = str.replace(/ì|í|ị|ỉ|ĩ/g, 'i');
@@ -44,7 +44,7 @@ const UploadModal = () => {
     str = str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g, 'y');
     str = str.replace(/đ/g, 'd');
     return str;
-  };
+  }; */
 
   const onSubmit: SubmitHandler<FieldValues> = async (values) => {
     /* Upload to supabase */
@@ -60,7 +60,7 @@ const UploadModal = () => {
       }
 
       const uniqueId = uniqid();
-      const songTitle = removeVietnameseTones(values.title);
+      const songTitle = values.title;
       const uniqueSongTitle = `song-${songTitle}-${uniqueId}`;
       const uniqueImageTitle = `image-${songTitle}-${uniqueId}`;
 
@@ -80,28 +80,25 @@ const UploadModal = () => {
       }
 
       /* Upload image */
-      const { data: imageData, error: imageError } =
-        await supabaseClient.storage
-          .from('images')
-          .upload(uniqueImageTitle, imageFile, {
-            cacheControl: '3600',
-            upsert: false,
-          });
+      const { data: imageData, error: imageError } = await supabaseClient.storage
+        .from('images')
+        .upload(uniqueImageTitle, imageFile, {
+          cacheControl: '3600',
+          upsert: false,
+        });
 
       if (imageError) {
         setIsLoading(false);
         return toast.error('Failed image upload');
       }
 
-      const { error: supabaseError } = await supabaseClient
-        .from('songs')
-        .insert({
-          user_id: user.id,
-          title: values.title,
-          author: values.author,
-          image_path: imageData.path,
-          song_path: songData.path,
-        });
+      const { error: supabaseError } = await supabaseClient.from('songs').insert({
+        user_id: user.id,
+        title: values.title,
+        author: values.author,
+        image_path: imageData.path,
+        song_path: songData.path,
+      });
 
       if (supabaseError) {
         setIsLoading(false);
