@@ -4,8 +4,16 @@ import { cookies } from 'next/headers';
 import { Song } from '@/types';
 import getSongs from './getSongs';
 
+function removeVietnameseTones(str: String) {
+  return str
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/đ/g, 'd')
+    .replace(/Đ/g, 'D');
+}
+
 const getSongsByTitle = async (title: string): Promise<Song[]> => {
-  const supabase = createServerComponentClient({
+  /* const supabase = createServerComponentClient({
     cookies: cookies,
   });
 
@@ -23,8 +31,20 @@ const getSongsByTitle = async (title: string): Promise<Song[]> => {
   if (error) {
     console.log(error.message);
   }
+  return (data as any) || []; */
 
-  return (data as any) || [];
+  const allSongs = await getSongs();
+  if (!title) {
+    return allSongs;
+  }
+
+  const normalizedTitle = removeVietnameseTones(title).toLowerCase();
+
+  return (
+    allSongs.filter((song) =>
+      removeVietnameseTones(song.title).toLowerCase().includes(normalizedTitle),
+    ) || []
+  );
 };
 
 export default getSongsByTitle;

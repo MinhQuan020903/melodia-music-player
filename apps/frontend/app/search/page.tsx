@@ -21,6 +21,7 @@ const Search = async ({ searchParams }: SearchProps) => {
         w-full 
         overflow-hidden 
         overflow-y-auto
+        scrollbar-hide
       "
     >
       <Header className="from-bg-neutral-900">

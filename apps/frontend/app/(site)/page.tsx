@@ -10,7 +10,7 @@ export default async function Home() {
   const songs = await getSongs();
   const newestSongs = songs.slice(0, 5);
   // const recommendedSongs = await getRecommendedSongs('0cFfCyaHAOFJF8W4JyTuJn');
-  const recommendedSongs = songs.slice(6, 10);
+  const vietnameseSongs = songs.slice(5, 10);
 
   return (
     <div className="bg-neutral-900 rounded-lg h-full w-full overflow-h-auto custom-scroll">
@@ -31,12 +31,21 @@ export default async function Home() {
         </div>
       </div>
 
-      <div className="mt-2 mb-7 px-6">
+      {/* <div className="mt-2 mb-7 px-6">
         <div className="flex justify-between items-center">
           <h1 className="text-white text-2xl font-semibold">Recommended Songs</h1>
         </div>
         <div>
           <PageContent songs={recommendedSongs} />
+        </div>
+      </div> */}
+
+      <div className="mt-2 mb-7 px-6">
+        <div className="flex justify-between items-center">
+          <h1 className="text-white text-2xl font-semibold">Vietnamese Songs</h1>
+        </div>
+        <div>
+          <PageContent songs={vietnameseSongs} />
         </div>
       </div>
     </div>
