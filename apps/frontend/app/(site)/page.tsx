@@ -3,13 +3,18 @@ import Header from '@/components/Header';
 import ListItem from '@/components/ListItem';
 import PageContent from './components/PageContent';
 import getRecommendedSongs from '@/actions/getRecommendedSongs';
+import Recommendation from './Recommendation';
 
 export const revalidate = 0;
 
+// eslint-disable-next-line @next/next/no-async-client-component
 export default async function Home() {
   const songs = await getSongs();
   const newestSongs = songs.slice(0, 5);
-  // const recommendedSongs = await getRecommendedSongs('0cFfCyaHAOFJF8W4JyTuJn');
+
+  //When user has selected a song, show recommended songs
+
+  const recommendedSongs = await getRecommendedSongs('0cFfCyaHAOFJF8W4JyTuJn');
   const vietnameseSongs = songs.slice(5, 10);
 
   return (
@@ -22,32 +27,7 @@ export default async function Home() {
           </div>
         </div>
       </Header>
-      <div className="mt-2 mb-7 px-6">
-        <div className="flex justify-between items-center">
-          <h1 className="text-white text-2xl font-semibold">Newest Songs</h1>
-        </div>
-        <div>
-          <PageContent songs={newestSongs} />
-        </div>
-      </div>
-
-      {/* <div className="mt-2 mb-7 px-6">
-        <div className="flex justify-between items-center">
-          <h1 className="text-white text-2xl font-semibold">Recommended Songs</h1>
-        </div>
-        <div>
-          <PageContent songs={recommendedSongs} />
-        </div>
-      </div> */}
-
-      <div className="mt-2 mb-7 px-6">
-        <div className="flex justify-between items-center">
-          <h1 className="text-white text-2xl font-semibold">Vietnamese Songs</h1>
-        </div>
-        <div>
-          <PageContent songs={vietnameseSongs} />
-        </div>
-      </div>
+      <Recommendation newestSongs={newestSongs} vietnameseSongs={vietnameseSongs} />
     </div>
   );
 }

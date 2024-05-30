@@ -3,8 +3,11 @@ from joblib import load
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 from sklearn.metrics.pairwise import cosine_similarity
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
+CORS(app) 
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 # Tải mô hình và scaler đã lưu
 feat_vec = load('feat_vec.pkl')
@@ -15,12 +18,15 @@ client_credentials_manager = SpotifyClientCredentials(client_id='8adef4861ed24c5
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
 @app.route('/recommend', methods=['POST'])
+@cross_origin()
 def recommend_songs():
     data = request.json
     track_id = data['track_id']
+    print('track_id:\n\n\n\n', track_id)
 
     # Tìm vector đặc trưng của bài hát có track_id tương ứng
     track_vector = feat_vec.loc[feat_vec["track_id"]==track_id].drop('track_id', axis=1).fillna(0)
+    print("feat_vec_shape: ", feat_vec.shape)
     
     # Tính cosine similarity giữa vector này và tất cả các vector khác
     similarity_scores = cosine_similarity(feat_vec.drop('track_id', axis=1).fillna(0), track_vector).flatten()

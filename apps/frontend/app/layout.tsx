@@ -9,7 +9,7 @@ import ToasterProvider from '@/providers/ToasterProvider';
 import getSongsByUserId from '@/actions/getSongsByUserId';
 import Player from '@/components/Player';
 import getActiveProductsWithPrices from '@/actions/getActiveProductsWithPrices';
-
+import { ReduxProvider } from '@/redux/ReduxProvider';
 
 const font = Figtree({ subsets: ['latin'] });
 
@@ -33,9 +33,11 @@ export default async function RootLayout({
         <ToasterProvider />
         <SupabaseProvider>
           <UserProvider>
-            <ModalProvider products={products} />
-            <Sidebar songs={userSongs}>{children}</Sidebar>
-            <Player />
+            <ReduxProvider>
+              <ModalProvider products={products} />
+              <Sidebar songs={userSongs}>{children}</Sidebar>
+              <Player />
+            </ReduxProvider>
           </UserProvider>
         </SupabaseProvider>
       </body>

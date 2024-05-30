@@ -124,6 +124,12 @@ const UploadModal = () => {
       onChange={onChange}
     >
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-y-4">
+        {/* <Input
+          id="spotify_id"
+          disabled={isLoading}
+          {...register('spotify_id', { required: true })}
+          placeholder="Spotify ID"
+        /> */}
         <Input
           id="title"
           disabled={isLoading}
