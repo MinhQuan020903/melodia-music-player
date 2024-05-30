@@ -60,9 +60,8 @@ const UploadModal = () => {
       }
 
       const uniqueId = uniqid();
-      const songTitle = values.title;
-      const uniqueSongTitle = `song-${songTitle}-${uniqueId}`;
-      const uniqueImageTitle = `image-${songTitle}-${uniqueId}`;
+      const uniqueSongTitle = `song-${uniqueId}`;
+      const uniqueImageTitle = `image-${uniqueId}`;
 
       /* Upload song */
       const { data: songData, error: songError } = await supabaseClient.storage
