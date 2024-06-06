@@ -1,7 +1,17 @@
+import { Song } from '@/types';
 import { createSlice } from '@reduxjs/toolkit';
 
+const emptySong: Song = {
+  id: '',
+  user_id: '',
+  author: '',
+  title: '',
+  song_path: '',
+  image_path: '',
+};
+
 const initialState = {
-  selectedSong: null,
+  selectedSong: emptySong,
 };
 
 const selectedSongSlice = createSlice({

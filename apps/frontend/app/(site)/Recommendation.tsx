@@ -4,6 +4,7 @@ import getRecommendedSongs from '@/actions/getRecommendedSongs';
 import PageContent from './components/PageContent';
 import { useSelector } from 'react-redux';
 import { Song } from '@/types';
+import { persistor } from '@/redux/store';
 
 const Recommendation = ({
   newestSongs,
@@ -18,6 +19,12 @@ const Recommendation = ({
   const [recommendedSongs, setRecommendedSongs] = useState<Song[]>([]);
 
   useEffect(() => {
+    /* Dùng khi cần reset cấu trúc lưu trữ trong redux */
+    /*     const resetPersistedStore = async () => {
+      await persistor.purge();
+    };
+    resetPersistedStore(); */
+    if (selectedSong === null) return;
     console.log('🚀 ~ selectedSong spotify_id:', selectedSong.spotify_id);
     const fetchRecommendation = async (): Promise<any> => {
       const res = await getRecommendedSongs(selectedSong.spotify_id);
