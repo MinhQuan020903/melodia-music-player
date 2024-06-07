@@ -8,7 +8,7 @@ const persistConfig = {
   storage: storage,
   version: 1,
   timeout: 100000,
-  whitelist: ['selectedSong'],
+  whitelist: ['selectedSong', 'recommendedSong'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

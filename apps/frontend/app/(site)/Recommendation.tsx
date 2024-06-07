@@ -10,9 +10,13 @@ import { setReduxRecommendedSongs } from '@/redux/recommendedSong/recommendedSon
 const Recommendation = ({
   newestSongs,
   vietnameseSongs,
+  representedBySongs,
+  indieSongs,
 }: {
   newestSongs: any;
   vietnameseSongs: any;
+  representedBySongs: any;
+  indieSongs: any;
 }) => {
   const supabase = useSupabaseClient();
 
@@ -46,7 +50,6 @@ const Recommendation = ({
             console.error('Failed to fetch spotify Ids:', error);
             return;
           }
-          console.log('spotify iddddd: ', data);
           setRecommendedSongs(data as Song[]);
           dispatch(setReduxRecommendedSongs(data as Song[]));
         }
@@ -75,6 +78,24 @@ const Recommendation = ({
         </div>
         <div>
           <PageContent songs={vietnameseSongs} />
+        </div>
+      </div>
+
+      <div className="mt-2 mb-7 px-6">
+        <div className="flex justify-between items-center">
+          <h1 className="text-white text-2xl font-semibold">Indie Songs</h1>
+        </div>
+        <div>
+          <PageContent songs={indieSongs} />
+        </div>
+      </div>
+
+      <div className="mt-2 mb-7 px-6">
+        <div className="flex justify-between items-center">
+          <h1 className="text-white text-2xl font-semibold">Songs represented by "Mỹ Tâm"</h1>
+        </div>
+        <div>
+          <PageContent songs={representedBySongs} />
         </div>
       </div>
       {(selectedSong || recommendedSongs.length > 0) && (
