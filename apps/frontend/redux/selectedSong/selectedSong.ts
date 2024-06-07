@@ -8,6 +8,8 @@ const emptySong: Song = {
   title: '',
   song_path: '',
   image_path: '',
+  genre: '',
+  spotify_id: '',
 };
 
 const initialState = {
