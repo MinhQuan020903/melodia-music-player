@@ -1,14 +1,15 @@
 import { Song } from '@/types';
 
 // Hàm này gọi endpoint và chuyển đổi dữ liệu trả về thành mảng của Song
-const getRecommendedSongs = async (track_id: String): Promise<Song[]> => {
+const getRecommendedSongs = async (track: { track_id: string }): Promise<Song[]> => {
+  console.log('🚀 ~ getRecommendedSongs ~ track_id:', track);
   try {
     const response = await fetch('http://127.0.0.1:5000/recommend', {
       method: 'POST', // Sử dụng phương thức POST
       headers: {
         'Content-Type': 'application/json', // Thiết lập kiểu nội dung của request là JSON
       },
-      body: JSON.stringify({ track_id }), // Gửi track_id trong body của request
+      body: JSON.stringify(track), // Gửi track_id trong body của request
     });
 
     if (!response.ok) {

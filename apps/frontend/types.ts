@@ -7,6 +7,10 @@ export interface Song {
   title: string;
   song_path: string;
   image_path: string;
+  /**Ádd genere */
+  genre: string;
+  /**Add spotify_id */
+  spotify_id: string;
 }
 export interface UserDetails {
   id: string;
