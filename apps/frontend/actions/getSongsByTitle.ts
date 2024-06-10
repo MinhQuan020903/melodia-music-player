@@ -41,9 +41,13 @@ const getSongsByTitle = async (title: string): Promise<Song[]> => {
   const normalizedTitle = removeVietnameseTones(title).toLowerCase();
 
   return (
-    allSongs.filter((song) =>
-      removeVietnameseTones(song.title).toLowerCase().includes(normalizedTitle),
-    ) || []
+    allSongs
+      .filter((song) => removeVietnameseTones(song.title).toLowerCase().includes(normalizedTitle))
+      .concat(
+        allSongs.filter((song) =>
+          removeVietnameseTones(song.author).toLowerCase().includes(normalizedTitle),
+        ),
+      ) || []
   );
 };
 
