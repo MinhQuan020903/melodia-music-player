@@ -4,13 +4,16 @@ import { Song } from '@/types';
 const getRecommendedSongs = async (track: { track_id: string }): Promise<Song[]> => {
   console.log('🚀 ~ getRecommendedSongs ~ track_id:', track);
   try {
-    const response = await fetch('http://127.0.0.1:5000/recommend', {
-      method: 'POST', // Sử dụng phương thức POST
-      headers: {
-        'Content-Type': 'application/json', // Thiết lập kiểu nội dung của request là JSON
+    const response = await fetch(
+      process.env.NEXT_PUBLIC_RECOMMENDATION_SERVICE_URL + '/recommend',
+      {
+        method: 'POST', // Sử dụng phương thức POST
+        headers: {
+          'Content-Type': 'application/json', // Thiết lập kiểu nội dung của request là JSON
+        },
+        body: JSON.stringify(track), // Gửi track_id trong body của request
       },
-      body: JSON.stringify(track), // Gửi track_id trong body của request
-    });
+    );
 
     if (!response.ok) {
       throw new Error('Network response was not ok');
