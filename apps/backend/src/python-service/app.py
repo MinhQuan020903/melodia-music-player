@@ -1,3 +1,4 @@
+import os
 from flask import Flask, request, jsonify
 from joblib import load
 import spotipy
@@ -9,12 +10,14 @@ app = Flask(__name__)
 CORS(app) 
 app.config['CORS_HEADERS'] = 'Content-Type'
 
-# Tải mô hình và scaler đã lưu
+# Load the saved model and scaler
 feat_vec = load('feat_vec.pkl')
-# scaler = load('scaler.pkl') # Nếu bạn sử dụng scaler
+# scaler = load('scaler.pkl') # If you're using a scaler
 
-# Cấu hình Spotify API
-client_credentials_manager = SpotifyClientCredentials(client_id='8adef4861ed24c51b86a2c31a980007d', client_secret='0ad427da175c49d4ac78d286582d36c0')
+# Configure the Spotify API
+client_id = os.getenv('NEXT_PUBLIC_SPOTIFY_CLIENT_ID')
+client_secret = os.getenv('NEXT_PUBLIC_SPOTIFY_CLIENT_SECRET')
+client_credentials_manager = SpotifyClientCredentials(client_id=client_id, client_secret=client_secret)
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
 @app.route('/recommend', methods=['POST'])

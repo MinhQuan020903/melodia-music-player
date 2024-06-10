@@ -2,18 +2,15 @@ import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
 
 import { Song } from '@/types';
-import { getRequest } from '@/lib/fetch';
-import { supabase } from '@supabase/auth-ui-shared';
 
 const getSongs = async (): Promise<Song[]> => {
-  const onGetSongs = async () => {
-    const songs = await getRequest({
-      endPoint: `/api/song`,
-    });
-    return songs;
-  };
-  const res = await onGetSongs();
-  console.log('🚀 ~ getSongs ~ res:', res);
+  const supabase = createServerComponentClient({
+    cookies: cookies,
+  });
+
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
 
   const { data, error } = await supabase
     .from('songs')
