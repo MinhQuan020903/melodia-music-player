@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { SupabaseService } from '../common/supabase';
-import {} from '@supabase/postgrest-js';
 
 @Injectable()
 export class UserService {
