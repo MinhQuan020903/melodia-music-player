@@ -5,7 +5,7 @@ import { Song } from '@/types';
 import Image from 'next/image';
 import PlayButton from './PlayButton';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { setSelectedSong } from '@/redux/selectedSong/selectedSong';
 
 interface SongItemProps {
@@ -15,11 +15,19 @@ interface SongItemProps {
 
 const SongItem: React.FC<SongItemProps> = ({ data, onClick }) => {
   const dispatch = useDispatch();
+  const recommendedSongs = useSelector((state: any) => state.recommendedSong.recommendedSongs);
 
   const imagePath = useLoadImage(data);
 
   const handleClick = () => {
-    dispatch(setSelectedSong(data));
+    // Kiểm tra xem bài hát có nằm trong danh sách recommendedSongs không
+    const isRecommended = recommendedSongs.some((song: Song) => song.id === data.id);
+
+    if (!isRecommended) {
+      dispatch(setSelectedSong(data));
+    } else {
+      console.log('This song is from recommended songs, not dispatching setSelectedSong');
+    }
   };
 
   return (

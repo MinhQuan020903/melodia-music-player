@@ -4,6 +4,7 @@ import { Song } from '@/types';
 import { BsPauseFill, BsPlayFill } from 'react-icons/bs';
 import { AiFillStepBackward, AiFillStepForward } from 'react-icons/ai';
 import { HiSpeakerWave, HiSpeakerXMark } from 'react-icons/hi2';
+import { FaDownload } from 'react-icons/fa';
 import { useEffect, useState } from 'react';
 import useSound from 'use-sound';
 
@@ -12,6 +13,9 @@ import usePlayer from '@/hooks/usePlayer';
 import MediaItem from './MediaItem';
 import Slider from './Slider';
 import LikeButton from './LikeButton';
+import { useUser } from '@/hooks/useUser';
+import useSubscribeModal from '@/hooks/useSubscribeModal';
+import useAuthModal from '@/hooks/useAuthModal';
 
 interface PlayerContentProps {
   song: Song;
@@ -25,6 +29,10 @@ const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) => {
 
   const Icon = isPlaying ? BsPauseFill : BsPlayFill;
   const VolumeIcon = volume === 0 ? HiSpeakerXMark : HiSpeakerWave;
+
+  const { user, subscription } = useUser();
+  const subscribeModal = useSubscribeModal();
+  const authModal = useAuthModal();
 
   const onPlayNext = () => {
     if (player.ids.length === 0) {
@@ -88,6 +96,26 @@ const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) => {
     }
   };
 
+  const handleDownload = () => {
+    // Check quyền download
+    if (!user) {
+      authModal.onOpen();
+    } else if (!subscription) {
+      return subscribeModal.onOpen();
+    } else {
+      // Tạo một thẻ <a> tạm thời trong DOM
+      const anchor = document.createElement('a');
+      anchor.href = songUrl; // Đặt href là URL của bài hát
+      anchor.download = song.title || 'download.mp3'; // Đặt tên file mặc định nếu không có tên bài hát
+      anchor.target = '_blank'; // Mở trong tab mới
+
+      // Thêm thẻ <a> vào body, kích hoạt download, và sau đó xóa nó
+      document.body.appendChild(anchor);
+      anchor.click(); // Kích hoạt download
+      document.body.removeChild(anchor);
+    }
+  };
+
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 h-full">
       <div className="flex w-full justify-start">
@@ -131,6 +159,8 @@ const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) => {
         <div className="flex items-center gap-x-2 w-[120px]">
           <VolumeIcon onClick={toggleMute} className="cursor-pointer" size={34} />
           <Slider value={volume} onChange={(value) => setVolume(value)} />
+
+          <FaDownload onClick={handleDownload} size={34} className="cursor-pointer ml-2" />
         </div>
       </div>
     </div>

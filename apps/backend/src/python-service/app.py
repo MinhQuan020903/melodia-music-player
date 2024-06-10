@@ -22,7 +22,7 @@ sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 def recommend_songs():
     data = request.json
     track_id = data['track_id']
-    print('track_id:\n\n\n\n', track_id)
+    print('track_id:', track_id)
 
     # Tìm vector đặc trưng của bài hát có track_id tương ứng
     track_vector = feat_vec.loc[feat_vec["track_id"]==track_id].drop('track_id', axis=1).fillna(0)

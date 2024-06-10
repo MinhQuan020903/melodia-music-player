@@ -9,7 +9,7 @@ import { useEffect } from 'react';
 const Player = () => {
   const player = usePlayer();
   const { song } = useGetSongById(player.activeId);
-  console.log('Player: ', song);
+  console.log('Playerrrrrr: ', song);
   const songUrl = useLoadSongUrl(song!);
 
   useEffect(() => {
