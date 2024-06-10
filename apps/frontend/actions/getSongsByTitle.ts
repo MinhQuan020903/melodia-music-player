@@ -2,7 +2,7 @@ import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
 
 import { Song } from '@/types';
-import getSongs from './getSongs.1';
+import getSongs from './getSongs';
 
 function removeVietnameseTones(str: String) {
   return str
