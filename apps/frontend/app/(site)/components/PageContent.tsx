@@ -9,7 +9,6 @@ interface PageContentProps {
 }
 
 const PageContent: React.FC<PageContentProps> = ({ songs }) => {
-  console.log('🚀 ~ songs:', songs);
   const onPlay = useOnPlay(songs);
 
   if (songs.length === 0) {
