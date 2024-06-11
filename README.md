@@ -8,6 +8,16 @@ A user-friendly music streaming platform with recommendation system based on use
 
 ---
 
+## Tech Stack
+
+<p align="center">
+  <img src="./images/nextjs_logo.png" alt="Next.js" style="width:100px;height:100px;margin-right:10px;"/>
+  <img src="./images/flask_logo.png" alt="Flask" style="width:100px;height:100px;margin-right:10px;"/>
+  <img src="./images/supabase_logo.png" alt="Supabase" style="width:100px;height:100px;"/>
+</p>
+
+---
+
 ## Features
 
 - Find and listen to songs with user-friendly interfaces.
