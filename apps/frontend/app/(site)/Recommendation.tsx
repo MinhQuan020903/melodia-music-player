@@ -59,7 +59,7 @@ const Recommendation = ({
        * chúng ta sẽ lấy song_url từ supabase
        */
     } else return;
-  }, [selectedSong]);
+  }, [selectedSong, dispatch, supabase]);
 
   return (
     <div className="w-full h-full">
@@ -92,7 +92,9 @@ const Recommendation = ({
 
       <div className="mt-2 mb-7 px-6">
         <div className="flex justify-between items-center">
-          <h1 className="text-white text-2xl font-semibold">Songs represented by "Mỹ Tâm"</h1>
+          <h1 className="text-white text-2xl font-semibold">
+            Songs represented by &quot;Mỹ Tâm&quot;
+          </h1>
         </div>
         <div>
           <PageContent songs={representedBySongs} />
