@@ -7,6 +7,8 @@ import PlayButton from './PlayButton';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setSelectedSong } from '@/redux/selectedSong/selectedSong';
+import Lottie from 'lottie-react';
+import gold_medal from '@/assets/animations/gold_medal.json';
 
 interface SongItemProps {
   data: Song;
@@ -18,6 +20,14 @@ const SongItem: React.FC<SongItemProps> = ({ data, onClick }) => {
   const recommendedSongs = useSelector((state: any) => state.recommendedSong.recommendedSongs);
 
   const imagePath = useLoadImage(data);
+
+  const authors = data.author.split(' & ');
+  let composedBy = authors[0];
+  let presentedBy = authors.slice(1).join(' & ');
+
+  if (authors.length === 1) {
+    presentedBy = composedBy; // Nếu chỉ có một tác giả, sử dụng tên đó cho cả hai mục
+  }
 
   const handleClick = () => {
     // Kiểm tra xem bài hát có nằm trong danh sách recommendedSongs không
@@ -50,10 +60,18 @@ const SongItem: React.FC<SongItemProps> = ({ data, onClick }) => {
       </div>
       <div className="flex flex-col items-start w-full pt-4 gap-y-1">
         <p className="font-semibold truncate w-full">{data.title}</p>
-        <p className="text-neutral-400 text-sm pb-4 w-full truncate">By {data.author}</p>
+        <p className="text-neutral-200 text-sm w-full truncate">
+          <strong>Composed by:</strong> {composedBy}
+        </p>
+        <p className="text-neutral-200 text-sm w-full truncate">
+          <strong>Presented by:</strong> {presentedBy}
+        </p>
       </div>
       <div className="absolute bottom-24 right-5" onClick={handleClick}>
         <PlayButton />
+      </div>
+      <div className="absolute top-0 left-0">
+        <Lottie size={30} animationData={gold_medal} />
       </div>
     </div>
   );
