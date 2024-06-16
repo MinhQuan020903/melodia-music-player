@@ -48,7 +48,6 @@ const useGetSongById = (id?: string) => {
 
       if (error || !data) {
         const spotifySong = await fetchSongFromSpotify(id);
-        console.log('Check bai hat spotify: ', spotifySong);
         if (spotifySong) {
           setSong(spotifySong as Song);
         } else {
@@ -65,9 +64,7 @@ const useGetSongById = (id?: string) => {
     fetchSong();
   }, [id, supabaseClient]);
 
-  useEffect(() => {
-    console.log('Songggggggg:', song);
-  }, [song]);
+  useEffect(() => {}, [song]);
 
   return useMemo(
     () => ({

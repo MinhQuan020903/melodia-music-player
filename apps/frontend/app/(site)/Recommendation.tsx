@@ -35,7 +35,6 @@ const Recommendation = ({
     if (selectedSong) {
       //Save the previous recommended songs
       const fetchRecommendation = async (): Promise<any> => {
-        console.log('halo');
         const res = await getRecommendedSongs({ track_id: selectedSong.spotify_id });
         if (res) {
           // Tạo một mảng chứa các spotify_id từ kết quả res

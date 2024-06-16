@@ -11,6 +11,8 @@ export interface Song {
   genre: string;
   /**Add spotify_id */
   spotify_id: string;
+  view: number;
+  like: number;
 }
 export interface UserDetails {
   id: string;

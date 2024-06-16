@@ -9,12 +9,9 @@ import { useEffect } from 'react';
 const Player = () => {
   const player = usePlayer();
   const { song } = useGetSongById(player.activeId);
-  console.log('Playerrrrrr: ', song);
   const songUrl = useLoadSongUrl(song!);
 
-  useEffect(() => {
-    console.log('Test preview song:', song, 'Test preview song URL: ', songUrl);
-  }, [song, songUrl]);
+  useEffect(() => {}, [song, songUrl]);
 
   if (!song || !songUrl || !player.activeId) {
     return null;

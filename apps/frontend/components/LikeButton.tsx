@@ -2,6 +2,7 @@
 
 import useAuthModal from '@/hooks/useAuthModal';
 import { useUser } from '@/hooks/useUser';
+import { Song } from '@/types';
 import { useSessionContext } from '@supabase/auth-helpers-react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -9,10 +10,10 @@ import toast from 'react-hot-toast';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 
 interface LikeButtonProps {
-  songId: string;
+  song: Song;
 }
 
-const LikeButton: React.FC<LikeButtonProps> = ({ songId }) => {
+const LikeButton: React.FC<LikeButtonProps> = ({ song }) => {
   const router = useRouter();
   const { supabaseClient } = useSessionContext();
 
@@ -31,7 +32,7 @@ const LikeButton: React.FC<LikeButtonProps> = ({ songId }) => {
         .from('liked_songs')
         .select('*')
         .eq('user_id', user.id)
-        .eq('song_id', songId)
+        .eq('song_id', song.id)
         .single();
 
       if (!error && data) {
@@ -40,7 +41,7 @@ const LikeButton: React.FC<LikeButtonProps> = ({ songId }) => {
     };
 
     fetchData();
-  }, [songId, supabaseClient, user?.id]);
+  }, [song.id, supabaseClient, user?.id]);
 
   const Icon = isLiked ? AiFillHeart : AiOutlineHeart;
 
@@ -54,16 +55,22 @@ const LikeButton: React.FC<LikeButtonProps> = ({ songId }) => {
         .from('liked_songs')
         .delete()
         .eq('user_id', user.id)
-        .eq('song_id', songId);
+        .eq('song_id', song.id);
 
       if (error) {
         toast.error(error.message);
       } else {
         setIsLiked(false);
       }
+
+      const { error: updateLikeError } = await supabaseClient
+        .from('songs')
+        .update({ like: song.like - 1 })
+        .eq('id', song.id);
     } else {
+      // Add like the song
       const { error } = await supabaseClient.from('liked_songs').insert({
-        song_id: songId,
+        song_id: song.id,
         user_id: user.id,
       });
 
@@ -73,6 +80,13 @@ const LikeButton: React.FC<LikeButtonProps> = ({ songId }) => {
         setIsLiked(true);
         toast.success('Liked');
       }
+
+      //Update song likes count
+
+      const { error: updateLikeError } = await supabaseClient
+        .from('songs')
+        .update({ like: song.like + 1 })
+        .eq('id', song.id);
     }
 
     router.refresh();

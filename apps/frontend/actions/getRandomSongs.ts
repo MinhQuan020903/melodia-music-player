@@ -14,7 +14,6 @@ const getRandomSongs = async (): Promise<Song[]> => {
 
   const { data, error } = await supabase.from('random_songs').select('*');
 
-  console.log('Random Songs', data);
   if (error) {
     console.log(error.message);
   }

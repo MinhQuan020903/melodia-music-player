@@ -11,9 +11,7 @@ const useOnPlay = (songs: Song[]) => {
   const { user, subscription } = useUser();
   const subscribeModal = useSubscribeModal();
 
-  useEffect(() => {
-    console.log('Kiem tra player: ', player);
-  }, [player]);
+  useEffect(() => {}, [player]);
 
   /* Problems: Lowered SMTP rate limits (about 4/hours) */
 

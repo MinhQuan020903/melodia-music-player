@@ -2,7 +2,6 @@ import { Song } from '@/types';
 
 // Hàm này gọi endpoint và chuyển đổi dữ liệu trả về thành mảng của Song
 const getRecommendedSongs = async (track: { track_id: string }): Promise<Song[]> => {
-  console.log('🚀 ~ getRecommendedSongs ~ track_id:', track);
   try {
     const response = await fetch('http://127.0.0.1:5000/recommend', {
       method: 'POST', // Sử dụng phương thức POST
