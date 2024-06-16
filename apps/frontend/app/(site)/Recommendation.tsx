@@ -12,11 +12,15 @@ const Recommendation = ({
   vietnameseSongs,
   representedBySongs,
   indieSongs,
+  mostViewedSongs,
+  mostLikedSongs,
 }: {
   newestSongs: any;
   vietnameseSongs: any;
   representedBySongs: any;
   indieSongs: any;
+  mostViewedSongs: any;
+  mostLikedSongs: any;
 }) => {
   const supabase = useSupabaseClient();
 
@@ -68,6 +72,24 @@ const Recommendation = ({
         </div>
         <div>
           <PageContent songs={newestSongs} />
+        </div>
+      </div>
+
+      <div className="mt-2 mb-7 px-6">
+        <div className="flex justify-between items-center">
+          <h1 className="text-white text-2xl font-semibold">Most Viewed Songs</h1>
+        </div>
+        <div>
+          <PageContent songs={mostViewedSongs} />
+        </div>
+      </div>
+
+      <div className="mt-2 mb-7 px-6">
+        <div className="flex justify-between items-center">
+          <h1 className="text-white text-2xl font-semibold">Most Liked Songs</h1>
+        </div>
+        <div>
+          <PageContent songs={mostLikedSongs} />
         </div>
       </div>
 

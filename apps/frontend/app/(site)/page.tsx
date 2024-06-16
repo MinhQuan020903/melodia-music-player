@@ -3,6 +3,7 @@ import Header from '@/components/Header';
 import ListItem from '@/components/ListItem';
 import Recommendation from './Recommendation';
 import getRandomSongs from '@/actions/getRandomSongs';
+import { getTrendingSongs } from '@/actions/getTrendingSongs';
 
 export const revalidate = 0;
 
@@ -10,6 +11,11 @@ export const revalidate = 0;
 export default async function Home() {
   const songs = await getSongs();
   const newestSongs = songs.slice(0, 5);
+
+  const { getMostViewedSongs, getMostLikedSongs } = await getTrendingSongs();
+
+  const mostViewedSongs = await getMostViewedSongs();
+  const mostLikedSongs = await getMostLikedSongs();
 
   const randomSongs = await getRandomSongs();
   const vietnameseSongs = randomSongs
@@ -33,6 +39,8 @@ export default async function Home() {
         </div>
       </Header>
       <Recommendation
+        mostLikedSongs={mostLikedSongs}
+        mostViewedSongs={mostViewedSongs}
         newestSongs={newestSongs}
         vietnameseSongs={vietnameseSongs}
         representedBySongs={representedBySongs}
