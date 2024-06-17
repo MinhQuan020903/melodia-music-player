@@ -4,11 +4,13 @@ import useLoadImage from '@/hooks/useLoadImage';
 import { Song } from '@/types';
 import Image from 'next/image';
 import PlayButton from './PlayButton';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import selectedSong, { setSelectedSong } from '@/redux/selectedSong/selectedSong';
 import Lottie from 'lottie-react';
 import gold_medal from '@/assets/animations/gold_medal.json';
+import like from '@/assets/animations/like.json';
+import heart from '@/assets/animations/heart.json';
 import { FaEye, FaHeart } from 'react-icons/fa';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
 
@@ -16,9 +18,19 @@ interface SongItemProps {
   data: Song;
   onClick: (id: string) => void;
   selectedSongId: string | null;
+  isMostViewed: boolean;
+  isMostLiked?: boolean;
+  isRecommended?: boolean;
 }
 
-const SongItem: React.FC<SongItemProps> = ({ data, onClick, selectedSongId }) => {
+const SongItem: React.FC<SongItemProps> = ({
+  data,
+  onClick,
+  selectedSongId,
+  isMostViewed,
+  isMostLiked,
+  isRecommended,
+}) => {
   const supabase = useSupabaseClient();
 
   const dispatch = useDispatch();
@@ -95,6 +107,22 @@ const SongItem: React.FC<SongItemProps> = ({ data, onClick, selectedSongId }) =>
       }}
       className="relative group flex flex-col items-center justify-center rounded-md overflow-hidden gap-x-4 bg-neutral-400/5 cursor-pointer hover:bg-neutral-400/10 transition p-3"
     >
+      {isMostViewed && (
+        <div className="absolute top-0 z-10 -translate-x-20 w-[70%] mt-2 ml-6">
+          <Lottie animationData={gold_medal} sizes="5" />
+        </div>
+      )}
+      {isMostLiked && (
+        <div className="absolute top-0 z-10 -translate-x-20 w-[30%] mt-2 ml-8">
+          <Lottie animationData={like} sizes="5" />
+        </div>
+      )}
+      {isRecommended && (
+        <div className="absolute top-0 z-10 -translate-x-20 w-[30%] mt-2 ml-6">
+          <Lottie animationData={heart} sizes="5" />
+        </div>
+      )}
+
       <div className="relative aspect-square w-full h-full rounded-md overflow-hidden">
         <Image className="object-cover" src={imagePath || '/images/liked.png'} fill alt="Image" />
       </div>
@@ -109,11 +137,11 @@ const SongItem: React.FC<SongItemProps> = ({ data, onClick, selectedSongId }) =>
         <div className="text-neutral-200 text-sm w-full flex flex-row gap-3 items-center px-1">
           <div className="text-neutral-200 text-sm w-full flex flex-row gap-3 items-center">
             <FaEye color="cyan" />
-            <p>{views}</p>
+            <p>{views.toLocaleString()}</p>
           </div>
           <div className="text-neutral-200 text-sm w-full flex flex-row gap-3 items-center justify-end">
             <FaHeart color="Crimson" />
-            <p>{likes}</p>
+            <p>{likes.toLocaleString()}</p>
           </div>
         </div>
       </div>
@@ -124,9 +152,6 @@ const SongItem: React.FC<SongItemProps> = ({ data, onClick, selectedSongId }) =>
         }}
       >
         <PlayButton />
-      </div>
-      <div className="absolute top-0 left-0">
-        <Lottie size={30} animationData={gold_medal} sizes="15" />
       </div>
     </div>
   );

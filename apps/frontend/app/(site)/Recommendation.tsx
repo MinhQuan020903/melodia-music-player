@@ -68,7 +68,7 @@ const Recommendation = ({
     <div className="w-full h-full">
       <div className="mt-2 mb-7 px-6">
         <div className="flex justify-between items-center">
-          <h1 className="text-white text-2xl font-semibold">Newest Songs</h1>
+          <h1 className="text-white text-2xl font-semibold">Latest Songs 🔥</h1>
         </div>
         <div>
           <PageContent songs={newestSongs} />
@@ -77,25 +77,25 @@ const Recommendation = ({
 
       <div className="mt-2 mb-7 px-6">
         <div className="flex justify-between items-center">
-          <h1 className="text-white text-2xl font-semibold">Most Viewed Songs</h1>
+          <h1 className="text-white text-2xl font-semibold">Most Viewed Songs 👀</h1>
         </div>
         <div>
-          <PageContent songs={mostViewedSongs} />
+          <PageContent songs={mostViewedSongs} isMostViewed={true} />
         </div>
       </div>
 
       <div className="mt-2 mb-7 px-6">
         <div className="flex justify-between items-center">
-          <h1 className="text-white text-2xl font-semibold">Most Liked Songs</h1>
+          <h1 className="text-white text-2xl font-semibold">Most Liked Songs 👍</h1>
         </div>
         <div>
-          <PageContent songs={mostLikedSongs} />
+          <PageContent songs={mostLikedSongs} isMostLiked={true} />
         </div>
       </div>
 
       <div className="mt-2 mb-7 px-6">
         <div className="flex justify-between items-center">
-          <h1 className="text-white text-2xl font-semibold">Vietnamese Songs</h1>
+          <h1 className="text-white text-2xl font-semibold">Vietnamese Songs 🎶</h1>
         </div>
         <div>
           <PageContent songs={vietnameseSongs} />
@@ -104,7 +104,7 @@ const Recommendation = ({
 
       <div className="mt-2 mb-7 px-6">
         <div className="flex justify-between items-center">
-          <h1 className="text-white text-2xl font-semibold">Indie Songs</h1>
+          <h1 className="text-white text-2xl font-semibold">Indie Songs 🎼</h1>
         </div>
         <div>
           <PageContent songs={indieSongs} />
@@ -114,7 +114,7 @@ const Recommendation = ({
       <div className="mt-2 mb-7 px-6">
         <div className="flex justify-between items-center">
           <h1 className="text-white text-2xl font-semibold">
-            Songs represented by &quot;Mỹ Tâm&quot;
+            Songs represented by &quot;Mỹ Tâm&quot; 🙆
           </h1>
         </div>
         <div>
@@ -124,10 +124,10 @@ const Recommendation = ({
       {(selectedSong || recommendedSongs.length > 0) && (
         <div className="mt-2 mb-7 px-6">
           <div className="flex justify-between items-center">
-            <h1 className="text-white text-2xl font-semibold">Recommended Songs</h1>
+            <h1 className="text-white text-2xl font-semibold">Recommended Songs 🥰</h1>
           </div>
           <div>
-            <PageContent songs={recommendedSongs} />
+            <PageContent songs={recommendedSongs} isRecommended={true} />
           </div>
         </div>
       )}

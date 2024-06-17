@@ -7,9 +7,17 @@ import { useState } from 'react';
 
 interface PageContentProps {
   songs: Song[];
+  isMostViewed?: boolean;
+  isMostLiked?: boolean;
+  isRecommended?: boolean;
 }
 
-const PageContent: React.FC<PageContentProps> = ({ songs }) => {
+const PageContent: React.FC<PageContentProps> = ({
+  songs,
+  isMostViewed,
+  isMostLiked,
+  isRecommended,
+}) => {
   const [selectedSongId, setSelectedSongId] = useState<string | null>(null);
   const onPlay = useOnPlay(songs);
 
@@ -31,6 +39,9 @@ const PageContent: React.FC<PageContentProps> = ({ songs }) => {
             setSelectedSongId(id);
             onPlay(id);
           }}
+          isMostViewed={isMostViewed || false}
+          isMostLiked={isMostLiked || false}
+          isRecommended={isRecommended || false}
         />
       ))}
     </div>
